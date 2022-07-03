@@ -1,0 +1,104 @@
+.slider {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.imagesContainer {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.images {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 100%;
+    transition: 0.4s ease-in;
+    position: relative;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: 0.4s ease-in;
+}
+
+.fade .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.fade .images {
+    display: block;
+}
+
+.buttons {
+
+}
+
+.leftButtonContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.212);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttons > * > * {
+    cursor: pointer;
+}
+.rightButtonContainer {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.212);
+    display: flex;
+    align-items: center;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.2);
+    border: 2px solid transparent;
+    overflow: hidden;
+}
+.dot.circle {
+    border-radius: 50%;
+}
+.dot.square {
+
+}
+.dot:not(:last-child) {
+    margin-right: 10px;
+}
+.activeDot {
+    border: 2px solid white;
+}
+.dot > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}

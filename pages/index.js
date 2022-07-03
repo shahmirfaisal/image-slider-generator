@@ -1,209 +1,192 @@
-import Head from 'next/head'
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
+import { Slider } from "../components/Slider/";
+import { useState } from "react";
+import classes from "../styles/home.module.css";
+import { Code } from "../components/Code/";
+import {
+  ArrowCircleRight,
+  ArrowCircleLeft,
+  ArrowForwardIos,
+  ArrowBackIos,
+  ArrowBack,
+  ArrowForward,
+} from "@mui/icons-material";
 
-export default function Home() {
+const images = [
+  "https://res.cloudinary.com/dw3ap99ie/image/upload/v1600752716/j0ayzanbjujdckneszea.webp",
+  "https://res.cloudinary.com/dw3ap99ie/image/upload/v1602743807/jeisg3zmejgosog8hrjs.png",
+  "https://res.cloudinary.com/dw3ap99ie/image/upload/v1634044956/zwyxnnuksvd0pebn494o.jpg",
+];
+
+const Home = () => {
+  const [animationType, setAnimationType] = useState("simple");
+  const [autoPlay, setAutoPlay] = useState(false);
+  const [radioButtonType, setRadioButtonType] = useState("square");
+  const [forwardBackwardType, setForwardBackwardType] =
+    useState("arrow-circle");
+  const [code, setCode] = useState(null);
+
+  const changeAnimationType = (event) => {
+    setAnimationType(event.target.value);
+  };
+
+  const changeAutoPlay = (event) => {
+    setAutoPlay(event.target.value === "true");
+  };
+
+  const changeRadioButtonType = (event) => {
+    setRadioButtonType(event.target.value);
+  };
+
+  const changeForwardBackwardType = (event) => {
+    setForwardBackwardType(event.target.value);
+  };
+
+  const generateCodeHandler = () => {
+    let link = "http://localhost:3000/slider";
+    let query = "?";
+    images.forEach((img) => {
+      query += `image=${img}&`;
+    });
+    query += `animationType=${animationType}&`;
+    query += `autoPlay=${autoPlay}&`;
+    query += `radioButtonType=${radioButtonType}`;
+    link += query;
+    setCode(`<iframe src="${link}" style="border: none;"></iframe>`);
+  };
+
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Container maxWidth="md" sx={{ mb: 5 }}>
+      <Typography
+        variant="h3"
+        component="h1"
+        align="center"
+        sx={{ mt: 2, mb: 2 }}
+        className="heading"
+      >
+        Image Slider Generator
+      </Typography>
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Box component="section" sx={{ width: "100%", height: "400px", my: 5 }}>
+        <Slider
+          images={images}
+          animationType={animationType}
+          autoPlay={autoPlay}
+          radioButtonType={radioButtonType}
+          forwardBackwardType={forwardBackwardType}
+        />
+      </Box>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+      <Box component="section" sx={{ mt: 3, mb: 3 }}>
+        <Typography component="h2" variant="h4" className="heading">
+          Adjust Slider
+        </Typography>
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <div className={classes.sliderSettings}>
+          <FormControl>
+            <FormLabel>Animation Type</FormLabel>
+            <RadioGroup value={animationType} onChange={changeAnimationType}>
+              <FormControlLabel
+                value="simple"
+                control={<Radio />}
+                label="Simple"
+              />
+              <FormControlLabel
+                value="slide"
+                control={<Radio />}
+                label="Slide"
+              />
+              <FormControlLabel value="fade" control={<Radio />} label="Fade" />
+            </RadioGroup>
+          </FormControl>
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+          <FormControl>
+            <FormLabel>Auto Play</FormLabel>
+            <RadioGroup value={autoPlay} onChange={changeAutoPlay}>
+              <FormControlLabel value={true} control={<Radio />} label="ON" />
+              <FormControlLabel value={false} control={<Radio />} label="OFF" />
+            </RadioGroup>
+          </FormControl>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+          <FormControl>
+            <FormLabel>Radio Button</FormLabel>
+            <RadioGroup
+              value={radioButtonType}
+              onChange={changeRadioButtonType}
+            >
+              <FormControlLabel
+                value="square"
+                control={<Radio />}
+                label="Square"
+              />
+              <FormControlLabel
+                value="circle"
+                control={<Radio />}
+                label="Circle"
+              />
+              <FormControlLabel value="none" control={<Radio />} label="None" />
+            </RadioGroup>
+          </FormControl>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <FormControl>
+            <FormLabel>Forward/Backward Buttons</FormLabel>
+            <RadioGroup
+              value={forwardBackwardType}
+              onChange={changeForwardBackwardType}
+            >
+              <FormControlLabel
+                value="arrow-circle"
+                control={<Radio />}
+                label={
+                  <>
+                    <ArrowCircleLeft />
+                    <ArrowCircleRight />
+                  </>
+                }
+              />
+              <FormControlLabel
+                value="arrow-ios"
+                control={<Radio />}
+                label={
+                  <>
+                    <ArrowBackIos />
+                    <ArrowForwardIos />
+                  </>
+                }
+              />
+              <FormControlLabel
+                value="arrow"
+                control={<Radio />}
+                label={
+                  <>
+                    <ArrowBack />
+                    <ArrowForward />
+                  </>
+                }
+              />
+              <FormControlLabel value="none" control={<Radio />} label="None" />
+            </RadioGroup>
+          </FormControl>
         </div>
-      </main>
+      </Box>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
-      </footer>
+      <Button variant="contained" color="primary" onClick={generateCodeHandler}>
+        Get Code
+      </Button>
 
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
+      {code && <Code code={code} />}
+    </Container>
+  );
+};
 
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
-}
+export default Home;
