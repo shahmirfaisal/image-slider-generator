@@ -1,21 +1,19 @@
 import classes from "./style.module.css";
 import { useEffect, useRef, useState } from "react";
-import {
-  ArrowCircleRight,
-  ArrowCircleLeft,
-  ArrowBackIos,
-  ArrowForwardIos,
-  ArrowBack,
-  ArrowForward,
-} from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { Arrows } from "../Arrows/";
+import { RadioButtons } from "../RadioButtons/";
 
 export const Slider = ({
   images,
   animationType,
   autoPlay,
   radioButtonType,
-  forwardBackwardType,
+  arrowsType,
+  arrowsBackground,
+  arrowsBackgroundVisibility,
+  arrowsSize,
+  arrowsOffset,
+  arrowsColor,
 }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const imagesRef = useRef();
@@ -106,81 +104,7 @@ export const Slider = ({
     });
   };
 
-  const animations = {
-    simple: {
-      leftHandler: () => {
-        if (currentImage === images.length - 1) {
-          setCurrentImage(0);
-        } else {
-          setCurrentImage(currentImage + 1);
-        }
-      },
-      rightHandler: () => {
-        if (currentImage === images.length - 1) {
-          setCurrentImage(0);
-        } else {
-          setCurrentImage(currentImage + 1);
-        }
-      },
-    },
-
-    slide: {
-      leftHandler: () => {
-        if (currentImage === images.length - 1) {
-          setCurrentImage(0);
-        } else {
-          setCurrentImage(currentImage + 1);
-        }
-      },
-      rightHandler: () => {
-        if (currentImage === images.length - 1) {
-          setCurrentImage(0);
-        } else {
-          setCurrentImage(currentImage + 1);
-        }
-      },
-    },
-
-    fade: {
-      leftHandler: () => {
-        if (currentImage === 0) {
-          setCurrentImage(images.length - 1);
-        } else {
-          setCurrentImage(currentImage - 1);
-        }
-      },
-      rightHandler: () => {
-        if (currentImage === images.length - 1) {
-          setCurrentImage(0);
-        } else {
-          setCurrentImage(currentImage + 1);
-        }
-      },
-    },
-  };
-
-  const forwardBackwardIcons = {
-    arrow: {
-      left: <ArrowBack onClick={leftHandler} sx={{ fontSize: 50, mx: 2 }} />,
-      right: (
-        <ArrowForward onClick={rightHandler} sx={{ fontSize: 50, mx: 2 }} />
-      ),
-    },
-    "arrow-circle": {
-      left: (
-        <ArrowCircleLeft onClick={leftHandler} sx={{ fontSize: 50, mx: 2 }} />
-      ),
-      right: (
-        <ArrowCircleRight onClick={rightHandler} sx={{ fontSize: 50, mx: 2 }} />
-      ),
-    },
-    "arrow-ios": {
-      left: <ArrowBackIos onClick={leftHandler} sx={{ fontSize: 50, mx: 2 }} />,
-      right: (
-        <ArrowForwardIos onClick={rightHandler} sx={{ fontSize: 50, mx: 2 }} />
-      ),
-    },
-  };
+  const changeRadioImage = (i) => setCurrentImage(i);
 
   return (
     <div className={[classes.slider, classes[animationType]].join(" ")}>
@@ -192,34 +116,78 @@ export const Slider = ({
         </div>
       </div>
 
-      {forwardBackwardType !== "none" && (
-        <div className={classes.buttons}>
-          <div className={classes.leftButtonContainer}>
-            {forwardBackwardIcons[forwardBackwardType].left}
-          </div>
-          <div className={classes.rightButtonContainer}>
-            {forwardBackwardIcons[forwardBackwardType].right}
-          </div>
-        </div>
-      )}
+      <Arrows
+        arrowsType={arrowsType}
+        arrowsBackground={arrowsBackground}
+        arrowsBackgroundVisibility={arrowsBackgroundVisibility}
+        arrowsOffset={arrowsOffset}
+        arrowsSize={arrowsSize}
+        leftHandler={leftHandler}
+        rightHandler={rightHandler}
+        arrowsColor={arrowsColor}
+      />
 
-      {radioButtonType !== "none" && (
-        <div className={classes.dots}>
-          {images.map((img, i) => (
-            <div
-              key={i}
-              className={[
-                classes.dot,
-                classes[radioButtonType],
-                currentImage === i ? classes.activeDot : null,
-              ].join(" ")}
-              onClick={() => setCurrentImage(i)}
-            >
-              <img src={img} />
-            </div>
-          ))}
-        </div>
-      )}
+      <RadioButtons
+        radioButtonType={radioButtonType}
+        images={images}
+        changeRadioImage={changeRadioImage}
+        currentImage={currentImage}
+      />
+
+      <style jsx>{``}</style>
     </div>
   );
 };
+
+// const animations = {
+//   simple: {
+//     leftHandler: () => {
+//       if (currentImage === images.length - 1) {
+//         setCurrentImage(0);
+//       } else {
+//         setCurrentImage(currentImage + 1);
+//       }
+//     },
+//     rightHandler: () => {
+//       if (currentImage === images.length - 1) {
+//         setCurrentImage(0);
+//       } else {
+//         setCurrentImage(currentImage + 1);
+//       }
+//     },
+//   },
+
+//   slide: {
+//     leftHandler: () => {
+//       if (currentImage === images.length - 1) {
+//         setCurrentImage(0);
+//       } else {
+//         setCurrentImage(currentImage + 1);
+//       }
+//     },
+//     rightHandler: () => {
+//       if (currentImage === images.length - 1) {
+//         setCurrentImage(0);
+//       } else {
+//         setCurrentImage(currentImage + 1);
+//       }
+//     },
+//   },
+
+//   fade: {
+//     leftHandler: () => {
+//       if (currentImage === 0) {
+//         setCurrentImage(images.length - 1);
+//       } else {
+//         setCurrentImage(currentImage - 1);
+//       }
+//     },
+//     rightHandler: () => {
+//       if (currentImage === images.length - 1) {
+//         setCurrentImage(0);
+//       } else {
+//         setCurrentImage(currentImage + 1);
+//       }
+//     },
+//   },
+// };

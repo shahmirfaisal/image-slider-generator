@@ -8,6 +8,8 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  Slider as MaterialSlider,
+  Input,
 } from "@mui/material";
 import { Slider } from "../components/Slider/";
 import { useState } from "react";
@@ -32,8 +34,13 @@ const Home = () => {
   const [animationType, setAnimationType] = useState("simple");
   const [autoPlay, setAutoPlay] = useState(false);
   const [radioButtonType, setRadioButtonType] = useState("square");
-  const [forwardBackwardType, setForwardBackwardType] =
-    useState("arrow-circle");
+  const [arrowsType, setArrowsType] = useState("arrow-circle");
+  const [arrowsBackground, setArrowsBackground] = useState("visible");
+  const [arrowsBackgroundVisibility, setArrowsBackgroundVisibility] =
+    useState(212);
+  const [arrowsSize, setArrowsSize] = useState(50);
+  const [arrowsOffset, setArrowsOffset] = useState(1);
+  const [arrowsColor, setArrowsColor] = useState("#000000");
   const [code, setCode] = useState(null);
 
   const changeAnimationType = (event) => {
@@ -48,8 +55,29 @@ const Home = () => {
     setRadioButtonType(event.target.value);
   };
 
-  const changeForwardBackwardType = (event) => {
-    setForwardBackwardType(event.target.value);
+  const changeArrowsType = (event) => {
+    setArrowsType(event.target.value);
+  };
+
+  const changeArrowsBackground = (event) => {
+    setArrowsBackground(event.target.value);
+  };
+
+  const changeArrowsBackgroundVisibility = (event, newValue) => {
+    setArrowsBackgroundVisibility(newValue);
+  };
+
+  const changeArrowsSize = (event, newValue) => {
+    setArrowsSize(newValue);
+  };
+
+  const changeArrowsOffset = (event, newValue) => {
+    setArrowsOffset(newValue);
+  };
+
+  const changeArrowsColor = (e) => {
+    setArrowsColor(e.target.value);
+    console.log(arrowsColor);
   };
 
   const generateCodeHandler = () => {
@@ -83,7 +111,12 @@ const Home = () => {
           animationType={animationType}
           autoPlay={autoPlay}
           radioButtonType={radioButtonType}
-          forwardBackwardType={forwardBackwardType}
+          arrowsType={arrowsType}
+          arrowsBackground={arrowsBackground}
+          arrowsBackgroundVisibility={arrowsBackgroundVisibility}
+          arrowsSize={arrowsSize}
+          arrowsOffset={arrowsOffset}
+          arrowsColor={arrowsColor}
         />
       </Box>
 
@@ -139,11 +172,8 @@ const Home = () => {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Forward/Backward Buttons</FormLabel>
-            <RadioGroup
-              value={forwardBackwardType}
-              onChange={changeForwardBackwardType}
-            >
+            <FormLabel>Arrows</FormLabel>
+            <RadioGroup value={arrowsType} onChange={changeArrowsType}>
               <FormControlLabel
                 value="arrow-circle"
                 control={<Radio />}
@@ -176,6 +206,65 @@ const Home = () => {
               />
               <FormControlLabel value="none" control={<Radio />} label="None" />
             </RadioGroup>
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Arrows Background</FormLabel>
+            <RadioGroup
+              value={arrowsBackground}
+              onChange={changeArrowsBackground}
+            >
+              <FormControlLabel
+                value="visible"
+                control={<Radio />}
+                label="Visible"
+              />
+              <FormControlLabel
+                value="hidden"
+                control={<Radio />}
+                label="hidden"
+              />
+            </RadioGroup>
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Arrows Background Visibility</FormLabel>
+            <MaterialSlider
+              value={arrowsBackgroundVisibility}
+              onChange={changeArrowsBackgroundVisibility}
+              min={0}
+              max={1000}
+            />
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Arrows Size</FormLabel>
+            <MaterialSlider
+              value={arrowsSize}
+              onChange={changeArrowsSize}
+              min={0}
+              max={100}
+            />
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Arrows Offset</FormLabel>
+            <MaterialSlider
+              value={arrowsOffset}
+              onChange={changeArrowsOffset}
+              min={0}
+              max={10}
+              step={1}
+            />
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Arrows Color</FormLabel>
+            <input
+              type="color"
+              value={arrowsColor}
+              onChange={changeArrowsColor}
+            />
           </FormControl>
         </div>
       </Box>
