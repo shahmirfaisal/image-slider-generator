@@ -18,6 +18,7 @@ import { Slider } from "../components/Slider/";
 import { useState, useRef } from "react";
 import classes from "../styles/home.module.css";
 import { Code } from "../components/Code/";
+import Head from "next/head";
 import {
   ArrowCircleRight,
   ArrowCircleLeft,
@@ -110,13 +111,10 @@ const Home = () => {
     formData.append("file", e.target.files[0]);
     formData.append("upload_preset", "Ecommerce Images");
 
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dw3ap99ie/image/upload",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const res = await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_URL, {
+      method: "POST",
+      body: formData,
+    });
     const data = await res.json();
 
     setUploadingImage(false);
@@ -130,7 +128,7 @@ const Home = () => {
   };
 
   const generateCodeHandler = () => {
-    let link = "http://localhost:3000/slider";
+    let link = `${NEXT_PUBLIC_SITE_URL}/slider`;
     let query = "?";
     images.forEach((img) => {
       query += `image=${img.src}&`;
@@ -153,6 +151,44 @@ const Home = () => {
 
   return (
     <Container maxWidth="md" sx={{ mb: 5 }}>
+      <Head>
+        <title>
+          Image Slider Generator - Quickly Create and Customize Image Sliders
+        </title>
+        <meta
+          name="description"
+          content="Instantly create and customize image sliders and use them in your projects"
+        />
+        <meta
+          property="og:url"
+          content={process.env.NEXT_PUBLIC_SITE_URL}
+          key="ogurl"
+        />
+        {/* <meta
+          property="og:image"
+          content={`${process.env.NEXT_PUBLIC_SITE_URL}${image}`}
+          key="ogimage"
+        /> */}
+        <meta
+          property="og:site_name"
+          content={process.env.NEXT_PUBLIC_SITE_NAME}
+          key="ogsitename"
+        />
+        <meta
+          property="og:title"
+          content="Image Slider Generator - Quickly Create and Customize Image Sliders"
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content="Instantly create and customize image sliders and use them in your projects"
+          key="ogdesc"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@codewithshahmir" />
+      </Head>
+
       <Typography
         variant="h3"
         component="h1"
