@@ -12,6 +12,7 @@ import {
   Input,
   Paper,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 import { Slider } from "../components/Slider/";
 import { useState } from "react";
@@ -24,13 +25,8 @@ import {
   ArrowBackIos,
   ArrowBack,
   ArrowForward,
+  Clear,
 } from "@mui/icons-material";
-
-const images = [
-  "https://res.cloudinary.com/dw3ap99ie/image/upload/v1600752716/j0ayzanbjujdckneszea.webp",
-  "https://res.cloudinary.com/dw3ap99ie/image/upload/v1602743807/jeisg3zmejgosog8hrjs.png",
-  "https://res.cloudinary.com/dw3ap99ie/image/upload/v1634044956/zwyxnnuksvd0pebn494o.jpg",
-];
 
 const Home = () => {
   const [animationType, setAnimationType] = useState("simple");
@@ -46,6 +42,21 @@ const Home = () => {
   const [radioButtonSize, setRadioButtonSize] = useState(20);
   const [radioButtonGap, setRadioButtonGap] = useState(10);
   const [code, setCode] = useState(null);
+  const [images, setImages] = useState([
+    {
+      id: "1",
+      src: "https://res.cloudinary.com/dw3ap99ie/image/upload/v1600752716/j0ayzanbjujdckneszea.webp",
+    },
+    {
+      id: "2",
+      src: "https://res.cloudinary.com/dw3ap99ie/image/upload/v1602743807/jeisg3zmejgosog8hrjs.png",
+    },
+    {
+      id: "3",
+      src: "https://res.cloudinary.com/dw3ap99ie/image/upload/v1634044956/zwyxnnuksvd0pebn494o.jpg",
+    },
+  ]);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const changeAnimationType = (event) => {
     setAnimationType(event.target.value);
@@ -91,6 +102,30 @@ const Home = () => {
     setRadioButtonGap(newValue);
   };
 
+  const uploadImageHandler = async (e) => {
+    setUploadingImage(true);
+
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    formData.append("upload_preset", "Ecommerce Images");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dw3ap99ie/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const data = await res.json();
+
+    setUploadingImage(false);
+    setImages([{ id: data.asset_id, src: data.secure_url }, ...images]);
+  };
+
+  const removeImageHandler = (id) => {
+    setImages(images.filter((img) => img.id !== id));
+  };
+
   const generateCodeHandler = () => {
     let link = "http://localhost:3000/slider";
     let query = "?";
@@ -118,7 +153,7 @@ const Home = () => {
 
       <Box component="section" sx={{ width: "100%", height: "400px", my: 5 }}>
         <Slider
-          images={images}
+          images={images.map((img) => img.src)}
           animationType={animationType}
           autoPlay={autoPlay}
           radioButtonType={radioButtonType}
@@ -131,6 +166,46 @@ const Home = () => {
           radioButtonSize={radioButtonSize}
           radioButtonGap={radioButtonGap}
         />
+      </Box>
+
+      <Box component="section" sx={{ mb: 8 }}>
+        <Typography component="h2" variant="h4" className="heading">
+          Upload Your Images
+        </Typography>
+        <Button
+          component="label"
+          variant="contained"
+          color="primary"
+          htmlFor="image"
+          disabled={uploadingImage}
+          sx={{ mt: 3 }}
+        >
+          Upload Image{" "}
+          {uploadingImage && <CircularProgress size={25} color="primary" />}
+        </Button>
+        <input
+          type="file"
+          accept="image/*"
+          id="image"
+          hidden
+          onChange={uploadImageHandler}
+        />
+
+        <Paper
+          component="section"
+          className={classes.sliderImages}
+          sx={{ p: 2 }}
+        >
+          {images.map((image) => (
+            <div key={image.id}>
+              <img src={image.src} />
+              <Clear
+                fontSize="small"
+                onClick={removeImageHandler.bind(this, image.id)}
+              />
+            </div>
+          ))}
+        </Paper>
       </Box>
 
       <Box component="section" sx={{ mt: 3, mb: 3 }}>

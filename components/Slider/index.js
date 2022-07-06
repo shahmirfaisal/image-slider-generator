@@ -25,6 +25,11 @@ export const Slider = ({
   }, []);
 
   useEffect(() => {
+    console.log(images);
+    if (currentImage >= images.length) setCurrentImage(currentImage - 1);
+  }, [images]);
+
+  useEffect(() => {
     let autoPlaying;
 
     if (autoPlay) {
