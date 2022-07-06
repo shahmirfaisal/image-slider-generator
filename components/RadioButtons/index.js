@@ -3,6 +3,8 @@ export const RadioButtons = ({
   images,
   changeRadioImage,
   currentImage,
+  radioButtonSize,
+  radioButtonGap,
 }) => {
   return (
     <>
@@ -35,8 +37,8 @@ export const RadioButtons = ({
         }
 
         .radioButton {
-          width: 20px;
-          height: 20px;
+          width: ${radioButtonSize}px;
+          height: ${radioButtonSize}px;
           cursor: pointer;
           box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
           border: 2px solid transparent;
@@ -48,7 +50,7 @@ export const RadioButtons = ({
         .radioButton.square {
         }
         .radioButton:not(:last-child) {
-          margin-right: 10px;
+          margin-right: ${radioButtonGap}px;
         }
         .activeRadioButton {
           border-color: white;

@@ -10,6 +10,8 @@ import {
   Typography,
   Slider as MaterialSlider,
   Input,
+  Paper,
+  Divider,
 } from "@mui/material";
 import { Slider } from "../components/Slider/";
 import { useState } from "react";
@@ -41,6 +43,8 @@ const Home = () => {
   const [arrowsSize, setArrowsSize] = useState(50);
   const [arrowsOffset, setArrowsOffset] = useState(1);
   const [arrowsColor, setArrowsColor] = useState("#000000");
+  const [radioButtonSize, setRadioButtonSize] = useState(20);
+  const [radioButtonGap, setRadioButtonGap] = useState(10);
   const [code, setCode] = useState(null);
 
   const changeAnimationType = (event) => {
@@ -77,7 +81,14 @@ const Home = () => {
 
   const changeArrowsColor = (e) => {
     setArrowsColor(e.target.value);
-    console.log(arrowsColor);
+  };
+
+  const changeRadioButtonSize = (event, newValue) => {
+    setRadioButtonSize(newValue);
+  };
+
+  const changeRadioButtonGap = (event, newValue) => {
+    setRadioButtonGap(newValue);
   };
 
   const generateCodeHandler = () => {
@@ -117,157 +128,239 @@ const Home = () => {
           arrowsSize={arrowsSize}
           arrowsOffset={arrowsOffset}
           arrowsColor={arrowsColor}
+          radioButtonSize={radioButtonSize}
+          radioButtonGap={radioButtonGap}
         />
       </Box>
 
       <Box component="section" sx={{ mt: 3, mb: 3 }}>
-        <Typography component="h2" variant="h4" className="heading">
+        <Typography
+          component="h2"
+          variant="h4"
+          className="heading"
+          sx={{ mb: 2 }}
+        >
           Adjust Slider
         </Typography>
 
-        <div className={classes.sliderSettings}>
-          <FormControl>
-            <FormLabel>Animation Type</FormLabel>
-            <RadioGroup value={animationType} onChange={changeAnimationType}>
-              <FormControlLabel
-                value="simple"
-                control={<Radio />}
-                label="Simple"
-              />
-              <FormControlLabel
-                value="slide"
-                control={<Radio />}
-                label="Slide"
-              />
-              <FormControlLabel value="fade" control={<Radio />} label="Fade" />
-            </RadioGroup>
-          </FormControl>
+        <Paper className={classes.settingsPaper} component="section">
+          <Typography
+            component="h3"
+            variant="h5"
+            className="heading"
+            sx={{ mb: 3 }}
+          >
+            Animation Settings
+          </Typography>
 
-          <FormControl>
-            <FormLabel>Auto Play</FormLabel>
-            <RadioGroup value={autoPlay} onChange={changeAutoPlay}>
-              <FormControlLabel value={true} control={<Radio />} label="ON" />
-              <FormControlLabel value={false} control={<Radio />} label="OFF" />
-            </RadioGroup>
-          </FormControl>
+          <div>
+            <FormControl>
+              <FormLabel>Animation Type</FormLabel>
+              <RadioGroup value={animationType} onChange={changeAnimationType}>
+                <FormControlLabel
+                  value="simple"
+                  control={<Radio />}
+                  label="Simple"
+                />
+                <FormControlLabel
+                  value="slide"
+                  control={<Radio />}
+                  label="Slide"
+                />
+                <FormControlLabel
+                  value="fade"
+                  control={<Radio />}
+                  label="Fade"
+                />
+              </RadioGroup>
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>Radio Button</FormLabel>
-            <RadioGroup
-              value={radioButtonType}
-              onChange={changeRadioButtonType}
-            >
-              <FormControlLabel
-                value="square"
-                control={<Radio />}
-                label="Square"
-              />
-              <FormControlLabel
-                value="circle"
-                control={<Radio />}
-                label="Circle"
-              />
-              <FormControlLabel value="none" control={<Radio />} label="None" />
-            </RadioGroup>
-          </FormControl>
+            <FormControl>
+              <FormLabel>Auto Play</FormLabel>
+              <RadioGroup value={autoPlay} onChange={changeAutoPlay}>
+                <FormControlLabel value={true} control={<Radio />} label="ON" />
+                <FormControlLabel
+                  value={false}
+                  control={<Radio />}
+                  label="OFF"
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
+        </Paper>
 
-          <FormControl>
-            <FormLabel>Arrows</FormLabel>
-            <RadioGroup value={arrowsType} onChange={changeArrowsType}>
-              <FormControlLabel
-                value="arrow-circle"
-                control={<Radio />}
-                label={
-                  <>
-                    <ArrowCircleLeft />
-                    <ArrowCircleRight />
-                  </>
-                }
-              />
-              <FormControlLabel
-                value="arrow-ios"
-                control={<Radio />}
-                label={
-                  <>
-                    <ArrowBackIos />
-                    <ArrowForwardIos />
-                  </>
-                }
-              />
-              <FormControlLabel
-                value="arrow"
-                control={<Radio />}
-                label={
-                  <>
-                    <ArrowBack />
-                    <ArrowForward />
-                  </>
-                }
-              />
-              <FormControlLabel value="none" control={<Radio />} label="None" />
-            </RadioGroup>
-          </FormControl>
+        <Paper className={classes.settingsPaper} component="section">
+          <Typography
+            component="h3"
+            variant="h5"
+            className="heading"
+            sx={{ mb: 3 }}
+          >
+            Arrows Settings
+          </Typography>
 
-          <FormControl>
-            <FormLabel>Arrows Background</FormLabel>
-            <RadioGroup
-              value={arrowsBackground}
-              onChange={changeArrowsBackground}
-            >
-              <FormControlLabel
-                value="visible"
-                control={<Radio />}
-                label="Visible"
+          <div>
+            <FormControl>
+              <FormLabel>Arrows</FormLabel>
+              <RadioGroup value={arrowsType} onChange={changeArrowsType}>
+                <FormControlLabel
+                  value="arrow-circle"
+                  control={<Radio />}
+                  label={
+                    <>
+                      <ArrowCircleLeft />
+                      <ArrowCircleRight />
+                    </>
+                  }
+                />
+                <FormControlLabel
+                  value="arrow-ios"
+                  control={<Radio />}
+                  label={
+                    <>
+                      <ArrowBackIos />
+                      <ArrowForwardIos />
+                    </>
+                  }
+                />
+                <FormControlLabel
+                  value="arrow"
+                  control={<Radio />}
+                  label={
+                    <>
+                      <ArrowBack />
+                      <ArrowForward />
+                    </>
+                  }
+                />
+                <FormControlLabel
+                  value="none"
+                  control={<Radio />}
+                  label="None"
+                />
+              </RadioGroup>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Arrows Background</FormLabel>
+              <RadioGroup
+                value={arrowsBackground}
+                onChange={changeArrowsBackground}
+              >
+                <FormControlLabel
+                  value="visible"
+                  control={<Radio />}
+                  label="Visible"
+                />
+                <FormControlLabel
+                  value="hidden"
+                  control={<Radio />}
+                  label="hidden"
+                />
+              </RadioGroup>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Arrows Background Visibility</FormLabel>
+              <MaterialSlider
+                value={arrowsBackgroundVisibility}
+                onChange={changeArrowsBackgroundVisibility}
+                min={0}
+                max={1000}
               />
-              <FormControlLabel
-                value="hidden"
-                control={<Radio />}
-                label="hidden"
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Arrows Size</FormLabel>
+              <MaterialSlider
+                value={arrowsSize}
+                onChange={changeArrowsSize}
+                min={0}
+                max={100}
               />
-            </RadioGroup>
-          </FormControl>
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>Arrows Background Visibility</FormLabel>
-            <MaterialSlider
-              value={arrowsBackgroundVisibility}
-              onChange={changeArrowsBackgroundVisibility}
-              min={0}
-              max={1000}
-            />
-          </FormControl>
+            <FormControl>
+              <FormLabel>Arrows Offset</FormLabel>
+              <MaterialSlider
+                value={arrowsOffset}
+                onChange={changeArrowsOffset}
+                min={0}
+                max={10}
+                step={1}
+              />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>Arrows Size</FormLabel>
-            <MaterialSlider
-              value={arrowsSize}
-              onChange={changeArrowsSize}
-              min={0}
-              max={100}
-            />
-          </FormControl>
+            <FormControl>
+              <FormLabel>Arrows Color</FormLabel>
+              <input
+                type="color"
+                value={arrowsColor}
+                onChange={changeArrowsColor}
+              />
+            </FormControl>
+          </div>
+        </Paper>
 
-          <FormControl>
-            <FormLabel>Arrows Offset</FormLabel>
-            <MaterialSlider
-              value={arrowsOffset}
-              onChange={changeArrowsOffset}
-              min={0}
-              max={10}
-              step={1}
-            />
-          </FormControl>
+        <Paper className={classes.settingsPaper} component="section">
+          <Typography
+            component="h3"
+            variant="h5"
+            className="heading"
+            sx={{ mb: 3 }}
+          >
+            Radio Buttons Settings
+          </Typography>
 
-          <FormControl>
-            <FormLabel>Arrows Color</FormLabel>
-            <input
-              type="color"
-              value={arrowsColor}
-              onChange={changeArrowsColor}
-            />
-          </FormControl>
-        </div>
+          <div>
+            <FormControl>
+              <FormLabel>Radio Button</FormLabel>
+              <RadioGroup
+                value={radioButtonType}
+                onChange={changeRadioButtonType}
+              >
+                <FormControlLabel
+                  value="square"
+                  control={<Radio />}
+                  label="Square"
+                />
+                <FormControlLabel
+                  value="circle"
+                  control={<Radio />}
+                  label="Circle"
+                />
+                <FormControlLabel
+                  value="none"
+                  control={<Radio />}
+                  label="None"
+                />
+              </RadioGroup>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Radio Button Size</FormLabel>
+              <MaterialSlider
+                value={radioButtonSize}
+                onChange={changeRadioButtonSize}
+                min={5}
+                max={100}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Radio Buttons Gap</FormLabel>
+              <MaterialSlider
+                value={radioButtonGap}
+                onChange={changeRadioButtonGap}
+                min={5}
+                max={100}
+              />
+            </FormControl>
+          </div>
+        </Paper>
       </Box>
+
+      <Divider sx={{ mb: 6, mt: 3 }} />
 
       <Button variant="contained" color="primary" onClick={generateCodeHandler}>
         Get Code

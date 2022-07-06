@@ -14,6 +14,8 @@ export const Slider = ({
   arrowsSize,
   arrowsOffset,
   arrowsColor,
+  radioButtonSize,
+  radioButtonGap,
 }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const imagesRef = useRef();
@@ -132,6 +134,8 @@ export const Slider = ({
         images={images}
         changeRadioImage={changeRadioImage}
         currentImage={currentImage}
+        radioButtonSize={radioButtonSize}
+        radioButtonGap={radioButtonGap}
       />
 
       <style jsx>{``}</style>

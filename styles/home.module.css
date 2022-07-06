@@ -1,5 +1,16 @@
 .sliderSettings {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 20px
+    grid-gap: 20px;
+}
+
+.settingsPaper {
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.settingsPaper > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 40px;
 }
