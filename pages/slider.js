@@ -4,6 +4,10 @@ import { useRouter } from "next/router";
 const ImageSlider = () => {
   const { query } = useRouter();
 
+  console.log(query.image);
+
+  if (!query.image) return null;
+
   return (
     <>
       <div
@@ -17,6 +21,14 @@ const ImageSlider = () => {
           animationType={query.animationType}
           autoPlay={query.autoPlay === "true"}
           radioButtonType={query.radioButtonType}
+          arrowsType={query.arrowsType}
+          arrowsBackground={query.arrowsBackground}
+          arrowsBackgroundVisibility={query.arrowsBackgroundVisibility}
+          arrowsSize={query.arrowsSize}
+          arrowsOffset={query.arrowsOffset}
+          arrowsColor={query.arrowsColor}
+          radioButtonSize={query.radioButtonSize}
+          radioButtonGap={query.radioButtonGap}
         />
       </div>
     </>

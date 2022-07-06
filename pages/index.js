@@ -15,7 +15,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { Slider } from "../components/Slider/";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import classes from "../styles/home.module.css";
 import { Code } from "../components/Code/";
 import {
@@ -57,6 +57,7 @@ const Home = () => {
     },
   ]);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const inputRef = useRef();
 
   const changeAnimationType = (event) => {
     setAnimationType(event.target.value);
@@ -120,6 +121,8 @@ const Home = () => {
 
     setUploadingImage(false);
     setImages([{ id: data.asset_id, src: data.secure_url }, ...images]);
+
+    inputRef.current.value = "";
   };
 
   const removeImageHandler = (id) => {
@@ -130,11 +133,20 @@ const Home = () => {
     let link = "http://localhost:3000/slider";
     let query = "?";
     images.forEach((img) => {
-      query += `image=${img}&`;
+      query += `image=${img.src}&`;
     });
     query += `animationType=${animationType}&`;
     query += `autoPlay=${autoPlay}&`;
-    query += `radioButtonType=${radioButtonType}`;
+    query += `radioButtonType=${radioButtonType}&`;
+    query += `radioButtonSize=${radioButtonSize}&`;
+    query += `radioButtonGap=${radioButtonGap}&`;
+    query += `arrowsType=${arrowsType}&`;
+    query += `arrowsBackground=${arrowsBackground}&`;
+    query += `arrowsBackgroundVisibility=${arrowsBackgroundVisibility}&`;
+    query += `arrowsSize=${arrowsSize}&`;
+    query += `arrowsOffset=${arrowsOffset}&`;
+    query += `arrowsColor=${arrowsColor}`;
+
     link += query;
     setCode(`<iframe src="${link}" style="border: none;"></iframe>`);
   };
@@ -189,22 +201,31 @@ const Home = () => {
           id="image"
           hidden
           onChange={uploadImageHandler}
+          ref={inputRef}
         />
 
         <Paper
           component="section"
           className={classes.sliderImages}
           sx={{ p: 2 }}
+          elevation={2}
         >
-          {images.map((image) => (
-            <div key={image.id}>
-              <img src={image.src} />
-              <Clear
-                fontSize="small"
-                onClick={removeImageHandler.bind(this, image.id)}
-              />
-            </div>
-          ))}
+          {!images.length && (
+            <Typography>
+              No Images. Click on 'UPLOAD IMAGE' to upload the images.
+            </Typography>
+          )}
+          <div>
+            {images.map((image) => (
+              <div key={image.id}>
+                <img src={image.src} />
+                <Clear
+                  fontSize="small"
+                  onClick={removeImageHandler.bind(this, image.id)}
+                />
+              </div>
+            ))}
+          </div>
         </Paper>
       </Box>
 
@@ -218,7 +239,11 @@ const Home = () => {
           Adjust Slider
         </Typography>
 
-        <Paper className={classes.settingsPaper} component="section">
+        <Paper
+          elevation={2}
+          className={classes.settingsPaper}
+          component="section"
+        >
           <Typography
             component="h3"
             variant="h5"
@@ -264,7 +289,11 @@ const Home = () => {
           </div>
         </Paper>
 
-        <Paper className={classes.settingsPaper} component="section">
+        <Paper
+          elevation={2}
+          className={classes.settingsPaper}
+          component="section"
+        >
           <Typography
             component="h3"
             variant="h5"
@@ -377,7 +406,11 @@ const Home = () => {
           </div>
         </Paper>
 
-        <Paper className={classes.settingsPaper} component="section">
+        <Paper
+          elevation={2}
+          className={classes.settingsPaper}
+          component="section"
+        >
           <Typography
             component="h3"
             variant="h5"
@@ -437,7 +470,12 @@ const Home = () => {
 
       <Divider sx={{ mb: 6, mt: 3 }} />
 
-      <Button variant="contained" color="primary" onClick={generateCodeHandler}>
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={!images.length}
+        onClick={generateCodeHandler}
+      >
         Get Code
       </Button>
 

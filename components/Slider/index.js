@@ -25,8 +25,8 @@ export const Slider = ({
   }, []);
 
   useEffect(() => {
-    console.log(images);
     if (currentImage >= images.length) setCurrentImage(currentImage - 1);
+    if (currentImage < 0) setCurrentImage(0);
   }, [images]);
 
   useEffect(() => {

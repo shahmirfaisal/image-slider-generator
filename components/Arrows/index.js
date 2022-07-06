@@ -17,8 +17,6 @@ export const Arrows = ({
   leftHandler,
   rightHandler,
 }) => {
-  console.log(arrowsColor);
-
   const arrowsIcons = {
     arrow: {
       left: (
