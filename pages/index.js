@@ -128,7 +128,7 @@ const Home = () => {
   };
 
   const generateCodeHandler = () => {
-    let link = `${NEXT_PUBLIC_SITE_URL}/slider`;
+    let link = `${process.env.NEXT_PUBLIC_SITE_URL}/slider`;
     let query = "?";
     images.forEach((img) => {
       query += `image=${img.src}&`;
