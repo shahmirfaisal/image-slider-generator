@@ -118,7 +118,12 @@ export const Slider = ({
       <div className={classes.imagesContainer}>
         <div className={classes.images} ref={imagesRef}>
           {images.map((image, i) => (
-            <img key={i} className={classes.image} src={image} />
+            <img
+              key={i}
+              className={classes.image}
+              src={image}
+              alt="Slider Image"
+            />
           ))}
         </div>
       </div>

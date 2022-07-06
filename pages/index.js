@@ -254,7 +254,7 @@ const Home = () => {
           <div>
             {images.map((image) => (
               <div key={image.id}>
-                <img src={image.src} />
+                <img src={image.src} alt="Slider Image" />
                 <Clear
                   fontSize="small"
                   onClick={removeImageHandler.bind(this, image.id)}
