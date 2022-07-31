@@ -1,0 +1,216 @@
+import { Layout } from "../components/Layout/";
+import {
+  Container,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+} from "@mui/material";
+import classes from "../styles/docs.module.css";
+
+export const EndpointTable = () => {
+  return (
+    <TableContainer component={Paper} sx={{ mb: 5, maxWidth: "500px" }}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Route</TableCell>
+            <TableCell>Method</TableCell>
+            <TableCell>Body</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>http://localhost:3000/api/slider</TableCell>
+            <TableCell>POST</TableCell>
+            <TableCell>Data</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
+
+export const DataTable = () => {
+  return (
+    <TableContainer component={Paper} sx={{ mb: 5, maxWidth: "500px" }}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Type</TableCell>
+            <TableCell>Default</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>images</TableCell>
+            <TableCell>Array</TableCell>
+            <TableCell>[]</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>options</TableCell>
+            <TableCell>Object</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
+
+export const OptionsTable = () => {
+  return (
+    <TableContainer component={Paper} sx={{ mb: 5, maxWidth: "500px" }}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Type</TableCell>
+            <TableCell>Default</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>animationType</TableCell>
+            <TableCell>String</TableCell>
+            <TableCell>simple</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>autoPlay</TableCell>
+            <TableCell>Boolean</TableCell>
+            <TableCell>false</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>arrowsType</TableCell>
+            <TableCell>String</TableCell>
+            <TableCell>arrow-circle</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>arrowsBackground</TableCell>
+            <TableCell>String</TableCell>
+            <TableCell>visible</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>arrowsBackgroundVisibility</TableCell>
+            <TableCell>Number</TableCell>
+            <TableCell>212</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>arrowsSize</TableCell>
+            <TableCell>Number</TableCell>
+            <TableCell>50</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>arrowsOffset</TableCell>
+            <TableCell>Number</TableCell>
+            <TableCell>1</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>arrowsColor</TableCell>
+            <TableCell>String</TableCell>
+            <TableCell>#000000</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>radioButtonType</TableCell>
+            <TableCell>String</TableCell>
+            <TableCell>square</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>radioButtonSize</TableCell>
+            <TableCell>Number</TableCell>
+            <TableCell>20</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>radioButtonGap</TableCell>
+            <TableCell>Number</TableCell>
+            <TableCell>10</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
+
+# API Documentation
+
+We recommend using the REST API when you want a dynamic slider.
+
+## Use Case
+
+If you have a huge website like an e-commerce store with dozens of product pages and you want a slider for each of those pages with different product images then we recommend using the REST API.
+
+## How it Works?
+
+You can send all the images you want in the slider along with some optional settings to the REST API and you will get a URL that you can use as a **src** attribute in **iframe** tag to show the slider.
+
+## Endpoint
+
+<EndpointTable />
+
+### Data
+
+<DataTable />
+
+#### Options
+
+<OptionsTable />
+
+## Example
+
+Here's a complete example of using the REST API with React.
+
+```javascript
+import { useState, useEffect } from "react";
+
+const images = [
+  "http://localhost:3000/bootstrap&copy.webp",
+  "https://res.cloudinary.com/dw3ap99ie/image/upload/v1634044956/zwyxnnuksvd0pebn494o.jpg",
+];
+
+const Test = () => {
+  const [loading, setLoading] = useState(false);
+  const [src, setSrc] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const res = await fetch("http://localhost:3000/api/slider", {
+        method: "POST",
+        body: JSON.stringify({
+          images,
+          options: {
+            // customize the slider
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      setSrc(data);
+      setLoading(false);
+    })();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <>
+      <iframe src={src} style={{ border: "none" }}></iframe>
+    </>
+  );
+};
+
+export default Test;
+```
+
+export default ({ children }) => (
+  <Layout>
+    <Container maxWidth="lg" className={classes.container}>
+      {children}
+    </Container>
+  </Layout>
+);

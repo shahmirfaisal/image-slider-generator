@@ -21,18 +21,12 @@ export const Slider = ({
   const imagesRef = useRef();
 
   useEffect(() => {
-    console.log(currentImage);
-  }, [currentImage]);
-
-  useEffect(() => {
     imagesRef.current.style.gridTemplateColumns = `repeat(${images.length}, 100%)`;
   }, [images]);
 
   useEffect(() => {
     if (currentImage >= images.length) setCurrentImage(currentImage - 1);
     if (currentImage < 0) setCurrentImage(0);
-
-    console.log(images);
   }, [images]);
 
   useEffect(() => {

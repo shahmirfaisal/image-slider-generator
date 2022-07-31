@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 const ImageSlider = () => {
   const { query } = useRouter();
 
-  console.log(query.image);
-
   if (!query.image) return null;
 
   return (

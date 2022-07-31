@@ -6,6 +6,7 @@ import {
   ArrowBack,
   ArrowForward,
 } from "@mui/icons-material";
+import { Box } from "@mui/material";
 
 export const Arrows = ({
   arrowsType,
@@ -19,76 +20,16 @@ export const Arrows = ({
 }) => {
   const arrowsIcons = {
     arrow: {
-      left: (
-        <ArrowBack
-          onClick={leftHandler}
-          sx={{
-            fontSize: arrowsSize,
-            mx: arrowsOffset,
-            cursor: "pointer",
-            color: arrowsColor,
-          }}
-        />
-      ),
-      right: (
-        <ArrowForward
-          onClick={rightHandler}
-          sx={{
-            fontSize: arrowsSize,
-            mx: arrowsOffset,
-            cursor: "pointer",
-            color: arrowsColor,
-          }}
-        />
-      ),
+      left: <ArrowBack onClick={leftHandler} />,
+      right: <ArrowForward onClick={rightHandler} />,
     },
     "arrow-circle": {
-      left: (
-        <ArrowCircleLeft
-          onClick={leftHandler}
-          sx={{
-            fontSize: arrowsSize,
-            mx: arrowsOffset,
-            cursor: "pointer",
-            color: arrowsColor,
-          }}
-        />
-      ),
-      right: (
-        <ArrowCircleRight
-          onClick={rightHandler}
-          sx={{
-            fontSize: arrowsSize,
-            mx: arrowsOffset,
-            cursor: "pointer",
-            color: arrowsColor,
-          }}
-        />
-      ),
+      left: <ArrowCircleLeft onClick={leftHandler} />,
+      right: <ArrowCircleRight onClick={rightHandler} />,
     },
     "arrow-ios": {
-      left: (
-        <ArrowBackIos
-          onClick={leftHandler}
-          sx={{
-            fontSize: arrowsSize,
-            mx: arrowsOffset,
-            cursor: "pointer",
-            color: arrowsColor,
-          }}
-        />
-      ),
-      right: (
-        <ArrowForwardIos
-          onClick={rightHandler}
-          sx={{
-            fontSize: arrowsSize,
-            mx: arrowsOffset,
-            cursor: "pointer",
-            color: arrowsColor,
-          }}
-        />
-      ),
+      left: <ArrowBackIos onClick={leftHandler} />,
+      right: <ArrowForwardIos onClick={rightHandler} />,
     },
   };
 
@@ -96,12 +37,60 @@ export const Arrows = ({
     <>
       {arrowsType !== "none" && (
         <div className="buttons">
-          <div className="leftButtonContainer">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="100%"
+            sx={{
+              transform: "translateY(-50%)",
+              position: "absolute",
+              top: "50%",
+              backgroundColor: `rgba(
+            0,
+            0,
+            0,
+            ${
+              arrowsBackground === "visible"
+                ? arrowsBackgroundVisibility / 1000
+                : 0
+            }
+          )`,
+
+              "& > svg": {
+                fontSize: `${+arrowsSize}px`,
+                mx: arrowsOffset,
+                cursor: "pointer",
+                color: arrowsColor,
+              },
+            }}
+          >
             {arrowsIcons[arrowsType].left}
-          </div>
-          <div className="rightButtonContainer">
+          </Box>
+          <Box
+            position="absolute"
+            height="100%"
+            display="flex"
+            alignItems="center"
+            sx={{
+              top: "50%",
+              right: "0",
+              transform: "translateY(-50%)",
+              backgroundColor: `rgba(0,0,0,${
+                arrowsBackground === "visible"
+                  ? arrowsBackgroundVisibility / 1000
+                  : 0
+              })`,
+              "& > svg": {
+                fontSize: `${+arrowsSize}px`,
+                mx: arrowsOffset,
+                cursor: "pointer",
+                color: arrowsColor,
+              },
+            }}
+          >
             {arrowsIcons[arrowsType].right}
-          </div>
+          </Box>
         </div>
       )}
 
