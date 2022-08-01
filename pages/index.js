@@ -45,28 +45,26 @@ const Home = () => {
     useState(212);
   const [arrowsSize, setArrowsSize] = useState(50);
   const [arrowsOffset, setArrowsOffset] = useState(1);
-  const [arrowsColor, setArrowsColor] = useState("#000000");
+  const [arrowsColor, setArrowsColor] = useState("#fff");
   const [radioButtonSize, setRadioButtonSize] = useState(20);
   const [radioButtonGap, setRadioButtonGap] = useState(10);
   const [code, setCode] = useState(null);
   const [images, setImages] = useState([
     {
       id: "1",
-      src: "https://res.cloudinary.com/dw3ap99ie/image/upload/v1600752716/j0ayzanbjujdckneszea.webp",
+      src: "https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       id: "2",
-      src: "https://res.cloudinary.com/dw3ap99ie/image/upload/v1602743807/jeisg3zmejgosog8hrjs.png",
+      src: "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       id: "3",
-      src: "https://res.cloudinary.com/dw3ap99ie/image/upload/v1634044956/zwyxnnuksvd0pebn494o.jpg",
+      src: "https://images.pexels.com/photos/1114690/pexels-photo-1114690.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
   ]);
   const [uploadingImage, setUploadingImage] = useState(false);
   const inputRef = useRef();
-
-  console.log(query);
 
   const changeAnimationType = (event) => {
     setAnimationType(event.target.value);
@@ -151,7 +149,7 @@ const Home = () => {
     query += `arrowsBackgroundVisibility=${arrowsBackgroundVisibility}&`;
     query += `arrowsSize=${arrowsSize}&`;
     query += `arrowsOffset=${arrowsOffset}&`;
-    query += `arrowsColor=${arrowsColor}`;
+    query += `arrowsColor=${encodeURIComponent(arrowsColor)}`;
 
     link += query;
     setCode(`<iframe src="${link}" style="border: none;"></iframe>`);
@@ -216,13 +214,8 @@ const Home = () => {
         </Box>
 
         <Box component="section" sx={{ mb: 8 }}>
-          <Typography
-            component="h2"
-            variant="h4"
-            className="heading"
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <ImageIcon sx={{ fontSize: "inherit" }} /> Upload Your Images
+          <Typography component="h2" variant="h4" className="heading">
+            Upload Your Images
           </Typography>
           <Button
             component="label"
@@ -275,9 +268,9 @@ const Home = () => {
             component="h2"
             variant="h4"
             className="heading"
-            sx={{ mb: 2, display: "flex", alignItems: "center" }}
+            sx={{ mb: 2 }}
           >
-            <SettingsIcon sx={{ fontSize: "inherit" }} /> Adjust Slider
+            Adjust Slider
           </Typography>
 
           <Paper

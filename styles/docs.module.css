@@ -20,6 +20,13 @@
 }
 .container td {
 }
+.container td span {
+    display: block;
+}
+
+.container td span:not(:last-child) {
+    margin-bottom: 10px;
+}
 
 /* .container table {
     border-collapse: collapse;

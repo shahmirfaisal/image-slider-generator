@@ -76,31 +76,32 @@ export const Header = () => {
             },
           }}
         >
-          <MenuItem onClick={handleClose}>
-            <Link href="/" passHref>
-              <MuiLink title="Home Page" underline="none">
+          <Link href="/" passHref>
+            <MuiLink title="Home Page" underline="none">
+              <MenuItem onClick={handleClose}>
                 <HomeIcon /> Home
-              </MuiLink>
-            </Link>
-          </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Link href="/documentation" passHref>
-              <MuiLink title="API Documentation" underline="none">
-                <ArticleIcon /> API Docs
-              </MuiLink>
-            </Link>
-          </MenuItem>
-
-          <MenuItem onClick={handleClose}>
-            <MuiLink
-              title="Github Repository"
-              underline="none"
-              href="https://github.com/shahmirfaisal/image-slider-generator"
-              target="_blank"
-            >
-              <GitHubIcon /> Github
+              </MenuItem>
             </MuiLink>
-          </MenuItem>
+          </Link>
+
+          <Link href="/documentation" passHref>
+            <MuiLink title="API Documentation" underline="none">
+              <MenuItem onClick={handleClose}>
+                <ArticleIcon /> API Docs
+              </MenuItem>
+            </MuiLink>
+          </Link>
+
+          <MuiLink
+            title="Github Repository"
+            underline="none"
+            href="https://github.com/shahmirfaisal/image-slider-generator"
+            target="_blank"
+          >
+            <MenuItem onClick={handleClose}>
+              <GitHubIcon /> Github
+            </MenuItem>
+          </MuiLink>
         </Menu>
 
         <Hidden mdDown>
