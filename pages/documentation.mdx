@@ -25,7 +25,9 @@ export const EndpointTable = () => {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>https://imageslidergenerator.shahmir.me</TableCell>
+            <TableCell>
+              https://imageslidergenerator.shahmir.me/api/slider
+            </TableCell>
             <TableCell>POST</TableCell>
             <TableCell>Data</TableCell>
           </TableRow>
@@ -224,20 +226,23 @@ const Test = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const res = await fetch("https://imageslidergenerator.shahmir.me/", {
-        method: "POST",
-        body: JSON.stringify({
-          images,
-          options: {
-            // customize the slider
-            arrowsColor: "#fff",
-            radioButtonSize: 50,
+      const res = await fetch(
+        "https://imageslidergenerator.shahmir.me/api/slider",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            images,
+            options: {
+              // customize the slider
+              arrowsColor: "#fff",
+              radioButtonSize: 50,
+            },
+          }),
+          headers: {
+            "Content-Type": "application/json",
           },
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+        }
+      );
       const data = await res.json();
       setSrc(data);
       setLoading(false);

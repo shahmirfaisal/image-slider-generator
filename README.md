@@ -18,9 +18,9 @@ You can send all the images you want in the slider along with some optional sett
 
 ## Endpoint
 
-| Route                                   | Method | Body |
-| --------------------------------------- | ------ | ---- |
-| https://imageslidergenerator.shahmir.me | POST   | Data |
+| Route                                              | Method | Body |
+| -------------------------------------------------- | ------ | ---- |
+| https://imageslidergenerator.shahmir.me/api/slider | POST   | Data |
 
 ## Data
 
@@ -52,20 +52,23 @@ const Test = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const res = await fetch("https://imageslidergenerator.shahmir.me/", {
-        method: "POST",
-        body: JSON.stringify({
-          images,
-          options: {
-            // customize the slider
-            arrowsColor: "#fff",
-            radioButtonSize: 50,
+      const res = await fetch(
+        "https://imageslidergenerator.shahmir.me/api/slider",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            images,
+            options: {
+              // customize the slider
+              arrowsColor: "#fff",
+              radioButtonSize: 50,
+            },
+          }),
+          headers: {
+            "Content-Type": "application/json",
           },
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+        }
+      );
       const data = await res.json();
       setSrc(data);
       setLoading(false);
