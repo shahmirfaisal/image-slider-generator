@@ -171,11 +171,11 @@ const Home = () => {
             content={process.env.NEXT_PUBLIC_SITE_URL}
             key="ogurl"
           />
-          {/* <meta
-          property="og:image"
-          content={`${process.env.NEXT_PUBLIC_SITE_URL}${image}`}
-          key="ogimage"
-        /> */}
+          <meta
+            property="og:image"
+            content={`${process.env.NEXT_PUBLIC_SITE_URL}/social.png`}
+            key="ogimage"
+          />
           <meta
             property="og:site_name"
             content={process.env.NEXT_PUBLIC_SITE_NAME}

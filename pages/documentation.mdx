@@ -10,6 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import classes from "../styles/docs.module.css";
+import Head from "next/head";
 
 export const EndpointTable = () => {
   return (
@@ -257,8 +258,47 @@ export default Test;
 
 export default ({ children }) => (
   <Layout>
+   <Head>
+          <title>
+            API Documentation - Image Slider Generator
+          </title>
+          <meta
+            name="description"
+            content="Use the REST API provided by Image Slider Generator to create dynamic image sliders."
+          />
+          <meta
+            property="og:url"
+            content={process.env.NEXT_PUBLIC_SITE_URL}
+            key="ogurl"
+          />
+          <meta
+            property="og:image"
+            content={`${process.env.NEXT_PUBLIC_SITE_URL}/social.png`}
+            key="ogimage"
+          />
+          <meta
+            property="og:site_name"
+            content={process.env.NEXT_PUBLIC_SITE_NAME}
+            key="ogsitename"
+          />
+          <meta
+            property="og:title"
+            content="API Documentation - Image Slider Generator"
+            key="ogtitle"
+          />
+          <meta
+            property="og:description"
+            content="Use the REST API provided by Image Slider Generator to create dynamic image sliders."
+            key="ogdesc"
+          />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:creator" content="@codewithshahmir" />
+        </Head>
+
     <Container maxWidth="lg" className={classes.container}>
       {children}
     </Container>
+
   </Layout>
 );
