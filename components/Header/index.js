@@ -46,7 +46,7 @@ export const Header = () => {
         }}
       >
         <Typography
-          variant="h4"
+          variant="h5"
           component="h1"
           align="center"
           className="heading"

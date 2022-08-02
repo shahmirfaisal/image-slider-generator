@@ -12,7 +12,7 @@
 }
 
 .container thead {
-    background-color: #3281E1;
+    background-color: #FA6166;
 }
 .container th {
     font-weight: 600;
@@ -27,27 +27,3 @@
 .container td span:not(:last-child) {
     margin-bottom: 10px;
 }
-
-/* .container table {
-    border-collapse: collapse;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    margin-bottom: 40px;
-}
-.container thead tr {
-    background-color: #3281E1;
-    color: #ffffff;
-    text-align: left;
-}
-.container th,
-.container td {
-    padding: 12px 15px;
-}
-.container tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-.container tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-.container tbody tr:last-of-type {
-    border-bottom: 2px solid #3281E1;
-} */

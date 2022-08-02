@@ -164,7 +164,7 @@ const Home = () => {
           </title>
           <meta
             name="description"
-            content="Instantly create and customize image sliders and use them in your projects"
+            content="Instantly create and customize image sliders and use them in your projects without any headache."
           />
           <meta
             property="og:url"
@@ -188,7 +188,7 @@ const Home = () => {
           />
           <meta
             property="og:description"
-            content="Instantly create and customize image sliders and use them in your projects"
+            content="Instantly create and customize image sliders and use them in your projects without any headache."
             key="ogdesc"
           />
 
