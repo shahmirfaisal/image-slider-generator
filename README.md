@@ -102,3 +102,13 @@ const Test = () => {
 
 export default Test;
 ```
+
+## Contributing
+
+Feel free to contribute.
+
+To get started, please take a look at the 'Issues' tab, where you will find open issues that exist with the project. If you see one that interests you, simply create a branch and submit a PR for review and approval. If you want to add a new feature, feel free to do so as well.
+
+## License
+
+Image Slider Generator is made available under the [MIT License](https://choosealicense.com/licenses/mit/).
