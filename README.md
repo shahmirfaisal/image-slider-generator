@@ -22,12 +22,28 @@ You can send all the images you want in the slider along with some optional sett
 | -------------------------------------------------- | ------ | ---- |
 | https://imageslidergenerator.shahmir.me/api/slider | POST   | Data |
 
-## Data
+### Data
 
 | Name    | Type   | Default |
 | ------- | ------ | ------- |
 | images  | Array  | []      |
 | options | Object |         |
+
+#### Options
+
+| Name                       | Type    | Possible Values                | Default      |
+| -------------------------- | ------- | ------------------------------ | ------------ |
+| animationType              | String  | simple, slide, fade            | simple       |
+| autoPlay                   | Boolean | true, false                    | false        |
+| arrowsType                 | String  | arrow-circle, arrow, arrow-ios | arrow-circle |
+| arrowsBackground           | String  | visible, hidden                | visible      |
+| arrowsBackgroundVisibility | Number  | 0 - 1000                       | 212          |
+| arrowsSize                 | Number  | 0 - 100                        | 50           |
+| arrowsOffset               | Number  | 0 - 10                         | 1            |
+| arrowsColor                | String  | Any Color                      | #fff         |
+| radioButtonType            | String  | square, circle, none           | square       |
+| radioButtonSize            | Number  | 5 - 100                        | 20           |
+| radioButtonGap             | Number  | 5 - 100                        | 10           |
 
 ## Response
 
