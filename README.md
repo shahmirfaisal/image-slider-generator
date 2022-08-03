@@ -18,16 +18,16 @@ You can send all the images you want in the slider along with some optional sett
 
 ## Endpoint
 
-| Route                                              | Method | Body |
-| -------------------------------------------------- | ------ | ---- |
-| https://imageslidergenerator.shahmir.me/api/slider | POST   | Data |
+| Route                                              | Method | Body          |
+| -------------------------------------------------- | ------ | ------------- |
+| https://imageslidergenerator.shahmir.me/api/slider | POST   | [Data](#data) |
 
 ### Data
 
-| Name    | Type   | Default |
-| ------- | ------ | ------- |
-| images  | Array  | []      |
-| options | Object |         |
+| Name                | Type   | Default |
+| ------------------- | ------ | ------- |
+| images              | Array  | []      |
+| [options](#options) | Object |         |
 
 #### Options
 
