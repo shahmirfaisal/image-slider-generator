@@ -15,6 +15,7 @@
     "@mui/material": "^5.8.6",
     "@next/mdx": "^12.2.3",
     "next": "latest",
+    "nextjs-cors": "^2.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-syntax-highlighter": "^15.5.0",
