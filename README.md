@@ -18,16 +18,17 @@ You can send all the images you want in the slider along with some optional sett
 
 ## Endpoint
 
-| Route                                              | Method | Body          |
-| -------------------------------------------------- | ------ | ------------- |
-| https://imageslidergenerator.shahmir.me/api/slider | POST   | [Data](#data) |
+| Route                                               | Method | Body            | Body Type | Description                    |
+| --------------------------------------------------- | ------ | --------------- | --------- | ------------------------------ |
+| https://imageslidergenerator.shahmir.me/api/slider  | POST   | [Data](#data)   | Object    | For creating a single slider.  |
+| https://imageslidergenerator.shahmir.me/api/sliders | POST   | [[Data](#data)] | Array     | For creating multiple sliders. |
 
 ### Data
 
-| Name                | Type   | Default |
-| ------------------- | ------ | ------- |
-| images              | Array  | []      |
-| [options](#options) | Object |         |
+| Name                | Type   | Default | Description                  |
+| ------------------- | ------ | ------- | ---------------------------- |
+| images              | Array  | []      | Array of images. Use string. |
+| [options](#options) | Object |         | Customize the slider.        |
 
 #### Options
 
@@ -50,6 +51,8 @@ You can send all the images you want in the slider along with some optional sett
 It gives you a URL that you can use in the **iframe** tag. See the below example.
 
 ## Example
+
+### Create a single slider
 
 Here's a complete example of using the REST API with React.
 
@@ -95,12 +98,78 @@ const Test = () => {
 
   return (
     <>
-      <iframe src={src} style={{ border: "none" }}></iframe>
+      <iframe src={src} style={{ border: "none", width: "300px", height: "300px }}></iframe>
     </>
   );
 };
 
 export default Test;
+```
+
+### Create multiple sliders
+
+Here's a complete example of using the REST API with React.
+
+```javascript
+import { useState, useEffect } from "react";
+
+const images = [
+  "https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=600",
+];
+
+const TestPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [srcLinks, setSrcLinks] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const res = await fetch(
+        "https://imageslidergenerator.shahmir.me/api/sliders",
+        {
+          method: "POST",
+          body: JSON.stringify([
+            {
+              images,
+              options: {
+                // customize the slider
+              },
+            },
+            {
+              images,
+              options: {
+                // customize the slider
+                animationType: "fade",
+              },
+            },
+          ]),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await res.json();
+      setSrcLinks(data);
+      setLoading(false);
+    })();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <>
+      {srcLinks.map((src) => (
+        <iframe
+          src={src}
+          style={{ border: "none", width: "300px", height: "300px" }}
+        ></iframe>
+      ))}
+    </>
+  );
+};
+
+export default TestPage;
 ```
 
 ## Contributing

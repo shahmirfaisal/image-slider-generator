@@ -27,3 +27,7 @@
 .container td span:not(:last-child) {
     margin-bottom: 10px;
 }
+
+.container pre {
+    margin-bottom: 40px;
+}
