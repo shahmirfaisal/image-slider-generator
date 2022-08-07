@@ -1,4 +1,8 @@
-export default (req, res) => {
+import NextCors from "nextjs-cors";
+
+export default async (req, res) => {
+  await NextCors(req, res);
+
   const sliderData = req.body;
 
   if (req.method === "POST") {
