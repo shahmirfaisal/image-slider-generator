@@ -12,14 +12,14 @@ import {
   Input,
   Paper,
   Divider,
-  CircularProgress,
-} from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
-import { Slider } from "../components/Slider/";
-import { useState, useRef } from "react";
-import classes from "../styles/home.module.css";
-import { Code } from "../components/Code/";
-import Head from "next/head";
+  CircularProgress
+} from "@mui/material"
+import SettingsIcon from "@mui/icons-material/Settings"
+import { Slider } from "../components/Slider/"
+import { useState, useRef } from "react"
+import classes from "../styles/home.module.css"
+import { Code } from "../components/Code/"
+import Head from "next/head"
 import {
   ArrowCircleRight,
   ArrowCircleLeft,
@@ -27,133 +27,133 @@ import {
   ArrowBackIos,
   ArrowBack,
   ArrowForward,
-  Clear,
-} from "@mui/icons-material";
-import { Layout } from "../components/Layout/";
-import { useRouter } from "next/router";
-import UploadIcon from "@mui/icons-material/Upload";
-import ImageIcon from "@mui/icons-material/Image";
+  Clear
+} from "@mui/icons-material"
+import { Layout } from "../components/Layout/"
+import { useRouter } from "next/router"
+import UploadIcon from "@mui/icons-material/Upload"
+import ImageIcon from "@mui/icons-material/Image"
 
 const Home = () => {
-  const { query } = useRouter();
-  const [animationType, setAnimationType] = useState("simple");
-  const [autoPlay, setAutoPlay] = useState(false);
-  const [radioButtonType, setRadioButtonType] = useState("square");
-  const [arrowsType, setArrowsType] = useState("arrow-circle");
-  const [arrowsBackground, setArrowsBackground] = useState("visible");
+  const { query } = useRouter()
+  const [animationType, setAnimationType] = useState("simple")
+  const [autoPlay, setAutoPlay] = useState(false)
+  const [radioButtonType, setRadioButtonType] = useState("square")
+  const [arrowsType, setArrowsType] = useState("arrow-circle")
+  const [arrowsBackground, setArrowsBackground] = useState("visible")
   const [arrowsBackgroundVisibility, setArrowsBackgroundVisibility] =
-    useState(212);
-  const [arrowsSize, setArrowsSize] = useState(50);
-  const [arrowsOffset, setArrowsOffset] = useState(1);
-  const [arrowsColor, setArrowsColor] = useState("#fff");
-  const [radioButtonSize, setRadioButtonSize] = useState(20);
-  const [radioButtonGap, setRadioButtonGap] = useState(10);
-  const [code, setCode] = useState(null);
+    useState(212)
+  const [arrowsSize, setArrowsSize] = useState(50)
+  const [arrowsOffset, setArrowsOffset] = useState(1)
+  const [arrowsColor, setArrowsColor] = useState("#fff")
+  const [radioButtonSize, setRadioButtonSize] = useState(20)
+  const [radioButtonGap, setRadioButtonGap] = useState(10)
+  const [code, setCode] = useState(null)
   const [images, setImages] = useState([
     {
       id: "1",
-      src: "https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=600",
+      src: "https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
       id: "2",
-      src: "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=600",
+      src: "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
       id: "3",
-      src: "https://images.pexels.com/photos/1114690/pexels-photo-1114690.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-  ]);
-  const [uploadingImage, setUploadingImage] = useState(false);
-  const inputRef = useRef();
+      src: "https://images.pexels.com/photos/1114690/pexels-photo-1114690.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+  ])
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const inputRef = useRef()
 
   const changeAnimationType = (event) => {
-    setAnimationType(event.target.value);
-  };
+    setAnimationType(event.target.value)
+  }
 
   const changeAutoPlay = (event) => {
-    setAutoPlay(event.target.value === "true");
-  };
+    setAutoPlay(event.target.value === "true")
+  }
 
   const changeRadioButtonType = (event) => {
-    setRadioButtonType(event.target.value);
-  };
+    setRadioButtonType(event.target.value)
+  }
 
   const changeArrowsType = (event) => {
-    setArrowsType(event.target.value);
-  };
+    setArrowsType(event.target.value)
+  }
 
   const changeArrowsBackground = (event) => {
-    setArrowsBackground(event.target.value);
-  };
+    setArrowsBackground(event.target.value)
+  }
 
   const changeArrowsBackgroundVisibility = (event, newValue) => {
-    setArrowsBackgroundVisibility(newValue);
-  };
+    setArrowsBackgroundVisibility(newValue)
+  }
 
   const changeArrowsSize = (event, newValue) => {
-    setArrowsSize(newValue);
-  };
+    setArrowsSize(newValue)
+  }
 
   const changeArrowsOffset = (event, newValue) => {
-    setArrowsOffset(newValue);
-  };
+    setArrowsOffset(newValue)
+  }
 
   const changeArrowsColor = (e) => {
-    setArrowsColor(e.target.value);
-  };
+    setArrowsColor(e.target.value)
+  }
 
   const changeRadioButtonSize = (event, newValue) => {
-    setRadioButtonSize(newValue);
-  };
+    setRadioButtonSize(newValue)
+  }
 
   const changeRadioButtonGap = (event, newValue) => {
-    setRadioButtonGap(newValue);
-  };
+    setRadioButtonGap(newValue)
+  }
 
   const uploadImageHandler = async (e) => {
-    setUploadingImage(true);
+    setUploadingImage(true)
 
-    const formData = new FormData();
-    formData.append("file", e.target.files[0]);
-    formData.append("upload_preset", "Ecommerce Images");
+    const formData = new FormData()
+    formData.append("file", e.target.files[0])
+    formData.append("upload_preset", "Ecommerce Images")
 
     const res = await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_URL, {
       method: "POST",
-      body: formData,
-    });
-    const data = await res.json();
+      body: formData
+    })
+    const data = await res.json()
 
-    setUploadingImage(false);
-    setImages([{ id: data.asset_id, src: data.secure_url }, ...images]);
+    setUploadingImage(false)
+    setImages([{ id: data.asset_id, src: data.secure_url }, ...images])
 
-    inputRef.current.value = "";
-  };
+    inputRef.current.value = ""
+  }
 
   const removeImageHandler = (id) => {
-    setImages(images.filter((img) => img.id !== id));
-  };
+    setImages(images.filter((img) => img.id !== id))
+  }
 
   const generateCodeHandler = () => {
-    let link = `${process.env.NEXT_PUBLIC_SITE_URL}/slider`;
-    let query = "?";
+    let link = `${process.env.NEXT_PUBLIC_SITE_URL}/slider`
+    let query = "?"
     images.forEach((img) => {
-      query += `image=${encodeURIComponent(img.src)}&`;
-    });
-    query += `animationType=${animationType}&`;
-    query += `autoPlay=${autoPlay}&`;
-    query += `radioButtonType=${radioButtonType}&`;
-    query += `radioButtonSize=${radioButtonSize}&`;
-    query += `radioButtonGap=${radioButtonGap}&`;
-    query += `arrowsType=${arrowsType}&`;
-    query += `arrowsBackground=${arrowsBackground}&`;
-    query += `arrowsBackgroundVisibility=${arrowsBackgroundVisibility}&`;
-    query += `arrowsSize=${arrowsSize}&`;
-    query += `arrowsOffset=${arrowsOffset}&`;
-    query += `arrowsColor=${encodeURIComponent(arrowsColor)}`;
+      query += `image=${encodeURIComponent(img.src)}&`
+    })
+    query += `animationType=${animationType}&`
+    query += `autoPlay=${autoPlay}&`
+    query += `radioButtonType=${radioButtonType}&`
+    query += `radioButtonSize=${radioButtonSize}&`
+    query += `radioButtonGap=${radioButtonGap}&`
+    query += `arrowsType=${arrowsType}&`
+    query += `arrowsBackground=${arrowsBackground}&`
+    query += `arrowsBackgroundVisibility=${arrowsBackgroundVisibility}&`
+    query += `arrowsSize=${arrowsSize}&`
+    query += `arrowsOffset=${arrowsOffset}&`
+    query += `arrowsColor=${encodeURIComponent(arrowsColor)}`
 
-    link += query;
-    setCode(`<iframe src="${link}" style="border: none;"></iframe>`);
-  };
+    link += query
+    setCode(`<iframe src="${link}" style="border: none;"></iframe>`)
+  }
 
   return (
     <Layout>
@@ -194,6 +194,26 @@ const Home = () => {
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:creator" content="@codewithshahmir" />
+          <meta
+            property="twitter:url"
+            content={process.env.NEXT_PUBLIC_SITE_URL}
+            key="twitterurl"
+          />
+          <meta
+            property="twitter:image"
+            content={`${process.env.NEXT_PUBLIC_SITE_URL}/social.png`}
+            key="twitterimage"
+          />
+          <meta
+            property="twitter:title"
+            content="Image Slider Generator - Quickly Create and Customize Image Sliders"
+            key="twittertitle"
+          />
+          <meta
+            property="twitter:description"
+            content="Instantly create and customize image sliders and use them in your projects without any headache."
+            key="twitterdesc"
+          />
         </Head>
 
         <Box component="section" sx={{ width: "100%", height: "400px", my: 5 }}>
@@ -523,7 +543,7 @@ const Home = () => {
         {code && <Code code={code} />}
       </Container>
     </Layout>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
