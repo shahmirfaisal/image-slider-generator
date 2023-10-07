@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Link, Typography } from "@mui/material";
+import { Box, Container, Grid, Link, Typography } from "@mui/material"
 
 export const Footer = () => {
   return (
@@ -9,13 +9,13 @@ export const Footer = () => {
             <Typography
               sx={{
                 fontSize: "1.1rem",
-                textAlign: { xs: "center", sm: "left" },
+                textAlign: { xs: "center", sm: "left" }
               }}
             >
               Developed by{" "}
               <Link
                 title="Owner"
-                href="https://portfolio.shahmir.me/"
+                href="https://shahmirfaisal.com"
                 target="_blank"
               >
                 Shahmir Faisal
@@ -27,7 +27,7 @@ export const Footer = () => {
             <Typography
               sx={{
                 fontSize: "1.1rem",
-                textAlign: { xs: "center", sm: "right" },
+                textAlign: { xs: "center", sm: "right" }
               }}
             >
               Give a{" "}
@@ -51,5 +51,5 @@ export const Footer = () => {
         </Grid>
       </Container>
     </Box>
-  );
-};
+  )
+}
