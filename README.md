@@ -2,7 +2,7 @@
 
 Quickly create and customize image sliders and use them in your projects instantly. This tool helps you create an image slider and customize it. It then gives you an iframe that you can use to display the slider on your website.
 
-Visit our [home page](https://imageslidergenerator.shahmir.me/) to create the slider instantly. It's like a drag and drop creator. Just upload the all of your images and change some settings to meet your needs.
+Visit our [home page](https://imageslidergenerator.shahmirfaisal.com/) to create the slider instantly. It's like a drag and drop creator. Just upload the all of your images and change some settings to meet your needs.
 
 ## REST API
 
@@ -18,10 +18,10 @@ You can send all the images you want in the slider along with some optional sett
 
 ## Endpoint
 
-| Route                                               | Method | Body            | Body Type | Description                    |
-| --------------------------------------------------- | ------ | --------------- | --------- | ------------------------------ |
-| https://imageslidergenerator.shahmir.me/api/slider  | POST   | [Data](#data)   | Object    | For creating a single slider.  |
-| https://imageslidergenerator.shahmir.me/api/sliders | POST   | [[Data](#data)] | Array     | For creating multiple sliders. |
+| Route                                                      | Method | Body            | Body Type | Description                    |
+| ---------------------------------------------------------- | ------ | --------------- | --------- | ------------------------------ |
+| https://imageslidergenerator.shahmirfaisal.com/api/slider  | POST   | [Data](#data)   | Object    | For creating a single slider.  |
+| https://imageslidergenerator.shahmirfaisal.com/api/sliders | POST   | [[Data](#data)] | Array     | For creating multiple sliders. |
 
 ### Data
 
@@ -72,7 +72,7 @@ const Test = () => {
     (async () => {
       setLoading(true);
       const res = await fetch(
-        "https://imageslidergenerator.shahmir.me/api/slider",
+        "https://imageslidergenerator.shahmirfaisal.com/api/slider",
         {
           method: "POST",
           body: JSON.stringify({
@@ -111,22 +111,22 @@ export default Test;
 Here's a complete example of using the REST API with React.
 
 ```javascript
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
 const images = [
   "https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=600",
-];
+  "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=600"
+]
 
 const TestPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [srcLinks, setSrcLinks] = useState([]);
+  const [loading, setLoading] = useState(false)
+  const [srcLinks, setSrcLinks] = useState([])
 
   useEffect(() => {
-    (async () => {
-      setLoading(true);
+    ;(async () => {
+      setLoading(true)
       const res = await fetch(
-        "https://imageslidergenerator.shahmir.me/api/sliders",
+        "https://imageslidergenerator.shahmirfaisal.com/api/sliders",
         {
           method: "POST",
           body: JSON.stringify([
@@ -134,28 +134,28 @@ const TestPage = () => {
               images,
               options: {
                 // customize the slider
-              },
+              }
             },
             {
               images,
               options: {
                 // customize the slider
-                animationType: "fade",
-              },
-            },
+                animationType: "fade"
+              }
+            }
           ]),
           headers: {
-            "Content-Type": "application/json",
-          },
+            "Content-Type": "application/json"
+          }
         }
-      );
-      const data = await res.json();
-      setSrcLinks(data);
-      setLoading(false);
-    })();
-  }, []);
+      )
+      const data = await res.json()
+      setSrcLinks(data)
+      setLoading(false)
+    })()
+  }, [])
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>
 
   return (
     <>
@@ -166,10 +166,10 @@ const TestPage = () => {
         ></iframe>
       ))}
     </>
-  );
-};
+  )
+}
 
-export default TestPage;
+export default TestPage
 ```
 
 ## Contributing
