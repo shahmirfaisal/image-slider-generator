@@ -114,17 +114,17 @@ const Home = () => {
     setUploadingImage(true)
 
     const formData = new FormData()
-    formData.append("file", e.target.files[0])
-    formData.append("upload_preset", "Ecommerce Images")
+    formData.append("key", "7fa3d9498582d2989d89cefca8ba3c01")
+    formData.append("image", e.target.files[0])
 
-    const res = await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_URL, {
+    const res = await fetch("https://api.imgbb.com/1/upload", {
       method: "POST",
       body: formData
     })
     const data = await res.json()
 
     setUploadingImage(false)
-    setImages([{ id: data.asset_id, src: data.secure_url }, ...images])
+    setImages([{ id: data.data.id, src: data.data.url }, ...images])
 
     inputRef.current.value = ""
   }
